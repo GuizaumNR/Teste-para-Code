@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang ="pt-br" xmlns:th="htpp://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>Teste</title>
+<meta name = "author" content = "Guilherme Rodrigues"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- cabeçalho -->
+<header th:fragment="cabecalho">
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4F4F4F">
+<a class="navbar-brand" th:href="@{/}">
+<img src="/img/logo_header-site.png" width="200px">
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMobile">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navMobile" class="navbar-collapse collapse justify-content-end"></div>
+
+	<a class="btn-nav nav-item nav-link" th:href="@{/index}"><i class="fas fa-home"> Home</i></a>
+	<a class="btn-nav nav-item nav-link" th:href="@{/inserirAlunos}"><i class="fas fa-user-graduate"> Cadastrar Aluno</i></a>
+	<a data-toggle="modal" data-target="#modalPesquisa" class="btn-nav nav-item nav-link"><i class="fas fa-search"> Pesquisar Aluno</i></a>
+	<form action="/logout" method="post">
+	<button type="submit" class="btn-nav nav-item nav-link btn-danger"><i class="fas fa-times"> Sair</i></button>
+	</form>
+</nav>
+
+</header>
+
+<!-- Footer -->
+<footer th:fragment="rodape">
+<div class="rodape">
+<span>
+Todos os Direitos Resevardos - 2020 &copy; Guilherme Rodrigues
+</span>
+</div>
+</footer>
+
+<!-- inicio do modal -->
+
+<div class="modal fade" id="modalPesquisa" th:fragment="modal">
+	<div class="modal-dialog modal-lg">
+	
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			
+				<h5 class="modal-title">Encontre um Aluno</h5>
+				<button type="button" class="close" data-dismiss="modal">
+				
+					<span>&times;</span>
+				
+				</button>
+			</div>
+		
+			<form method="post" action="pesquisar-aluno" th:object="${aluno}"> 
+			
+				<div class="modal-body">
+						<input class="form-control" th:field="*{nome}" placeholder="Digite o nome que deseja pesquisar" >
+				</div>
+			
+					<div class="modal-footer">
+					
+						<button class="btn3 btn-danger" data-dismiss="modal"> Fechar</button>
+						<button type="submit" class="btn3 btn-success"> Pesquisar</button>
+						
+					</div>
+			
+			</form>
+		
+		</div>
+	
+	</div>
+
+
+</div>
+
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

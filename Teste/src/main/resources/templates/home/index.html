@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang ="pt-br" xmlns:th="htpp://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>Teste</title>
+<meta name = "author" content = "Guilherme Rodrigues"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+	<div style="margin: 0; text-align: center;" class="alert alert-warning alert-dismissible fade show"
+		role="alert">
+		<strong>Seja Bem Vindo(a) <span th:text="${session.usuarioLogado.user}"></span>!</strong> 
+		<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+	</div>
+
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+
+<section class="neo-section" style="background-image: url('img/bg-index.jpg');">
+<div class="sombra">
+
+</div>
+<div class="center neo-container">
+<h2 class="texto-centro"> Sistema de Gerenciamento de Alunos</h2>
+ 
+<div class="botoes">
+
+<div class="wm">
+<a th:href="@{/inserirAlunos}" class="btn justify-content-center">Cadastrar Aluno</a>
+</div>
+
+<div class="wm" >
+<a th:href="@{alunos-inseridos}" class="btn justify-content-center" >Listar Alunos</a>
+</div>
+
+<div class="clear"></div>
+ </div>
+ </div>
+</section>
+
+<!-- inicio do modal -->
+
+<div class="modal fade" id="modalPesquisa">
+	<div class="modal-dialog modal-lg">
+	
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			
+				<h5 class="modal-title">Encontre um Aluno</h5>
+				<button type="button" class="close" data-dismiss="modal">
+				
+					<span>&times;</span>
+				
+				</button>
+			</div>
+		
+			<form method="post" action="pesquisar-aluno" th:object="${aluno}"> 
+			
+				<div class="modal-body">
+						<input class="form-control" th:field="*{nome}" placeholder="Digite o nome que deseja pesquisar" >
+				</div>
+			
+					<div class="modal-footer">
+					
+						<button class="btn3 btn-danger" data-dismiss="modal"> Fechar</button>
+						<button type="submit" class="btn3 btn-success"> Pesquisar</button>
+						
+					</div>
+			
+			</form>
+		
+		</div>
+	
+	</div>
+
+
+</div>
+
+<div th:replace="fragmentos/fragmentos :: rodape"></div>
+
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

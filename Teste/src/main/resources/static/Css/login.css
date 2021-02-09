@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+body, html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* Setando imagem */
+  background-image: url('/img/wallpaper-bg-login.jpg');
+
+  /* Adicionando blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Altura toda */
+  height: 100%;
+
+  /* Centralizando e dimensionando bem a imagem */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Posicione o texto no meio da página / imagem */
+.bg-text {
+  background-color: rgb(0,0,0); /* Cor reserva */
+  background-color: rgba(0,0,0, 0.4); /* Preto com / opacidade / transparente */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 80px;
+  text-align: center;
+}
+
+.main-div{background:  #fff; border-radius: 5px; margin: 0 auto; max-width: 90%; padding: 30px;}
+
+.texto-header{color: rgba(0,0,0,0.7)}
+
+.cadastro{color: rgba(0,0,0,0.7)}
+
+.form-control{background: #f7f7f7; border-radius: 7px; font-size: 15px; height: 50px; line-height: 50px;
+border: 2px solid #777777}
+
+.form-group{margin: 10px}
+
+.btn.btn-primary{
+	background: #696969;
+	border-color: #d4d4d4;
+	font-size: 1.1em;
+	padding: 0;
+	height: 50px;
+	width: 50%;
+	margin: 10px;
+	}
+	
+	.btn.btn-info{
+	background: #5F9EA0;
+	border-color: #d4d4d4;
+	font-size: 1em;
+	padding: 0;
+	height: 50px;
+	width: 30%;
+	}
+	
