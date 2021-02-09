@@ -1,14 +1,24 @@
 package com.Teste.controllers;
 
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.xml.UtilNamespaceHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Teste.dao.UsuarioDao;
+import com.Teste.model.Aluno;
 import com.Teste.model.Usuario;
+import com.Teste.service.ServiceExc;
 import com.Teste.service.ServiceUsuario;
+import com.Teste.util.Util;
 
 @Controller
 public class UsuarioController {
@@ -19,10 +29,19 @@ public class UsuarioController {
 	@Autowired
 	private ServiceUsuario serviceUsuario;
 	
-	@GetMapping("/")
+	@GetMapping("/")                       //home controller
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("Login/login");
+		mv.addObject("usuario", new Usuario());
+		return mv;
+	}
+	
+	@GetMapping("/index")
+	public ModelAndView index(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("home/index");
+		mv.addObject("aluno", new Aluno());
 		return mv;
 	}
 	
@@ -41,4 +60,29 @@ public class UsuarioController {
 		mv.setViewName("redirect:/");
 		return mv;
 }
+	
+	@PostMapping("/login")
+	public ModelAndView login(@Valid Usuario usuario, BindingResult br, HttpSession session) throws NoSuchAlgorithmException, ServiceExc {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("usuario", new Usuario());
+		if(br.hasErrors()) {
+			mv.setViewName("Login/login");
+		}
+		Usuario userLogin = serviceUsuario.loginUser(usuario.getUser(), Util.md5(usuario.getSenha()));
+		if(userLogin == null) {
+			mv.addObject("msg", "Usuário não encontrado. Tente novamente.");
+		}else {
+			session.setAttribute("usuarioLogado", userLogin);
+			
+			return index();
+			
+		}
+		return mv;
+	}
+	
+	@PostMapping("/logout")
+	public ModelAndView logout(HttpSession session) {
+		session.invalidate();
+		return login();
+	}
 }
